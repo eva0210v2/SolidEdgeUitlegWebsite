@@ -1,114 +1,157 @@
-
-
+/* -----------------------------------------------------------
+   FEEDBACK FORM STYLING
+   ----------------------------------------------------------- */
+#koptekst{
+    text-align: center;
+}
 #formContent {
-    width: 80%;
-    margin: auto;
+  width: 80%;
+  margin: auto;
+  max-width: 700px;
 }
 
+/* ------------------------------
+   Tekst en labels
+------------------------------ */
 
-
-/* h1 {
-    margin: 0 0 8px;
-    font-size: 22px
-} */
-
-/* p.lead {
-    margin: 0 0 18px;
-    color: #505f79
-} */
+p.lead {
+  margin-bottom: 18px;
+  color: #505f79;
+  line-height: 1.5;
+}
 
 label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px
+  display: block;
+  font-weight: 600;
 }
 
-input[type=text],
+/* extra marge specifiek voor het message label */
+.message-label {
+  margin-top: 18px;
+}
+
+/* ------------------------------
+   Inputvelden & Tekstarea
+------------------------------ */
+
+input,
 textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--mid1-gray-color);
-    border-radius: 8px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--mid1-gray-color);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  margin-bottom: 18px;
+  box-sizing: border-box;
 }
 
 textarea {
-    min-height: 140px;
-    resize: vertical
+  min-height: 120px;
+  resize: vertical;
 }
 
-.row {
-    display: grid;
-    grid-template-columns: 1fr 120px;
-    gap: 12px;
-    align-items: end
-}
+/* ------------------------------
+   Kleine tekst / meta info
+------------------------------ */
 
 .meta {
-    font-size: 13px;
-    color: #7a869a;
-    margin-top: 6px
-}
-
-.actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 16px
-}
-
-button {
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: 0;
-    background: var(--dark-green-color);
-    color: #fff;
-    font-weight: 700;
-    cursor: pointer
-}
-
-button:hover {
-    background: var(--light-green-color);
-}
-
-button.secondary {
-    background: var(--mid2-gray-color);
-    color: var(--white-color);
-}
-
-button.secondary:hover {
-    background: var(--mid1-gray-color);
-}
-
-.hint {
-    font-size: 13px;
-    color: #7a869a;
-    margin-top: 10px
-}
-
-.success {
-    background: #ecfdf5;
-    color: #065f46;
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 14px
-}
-
-.error {
-    background: #fff1f2;
-    color: #7f1d1d;
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 14px
+  font-size: 13px;
+  color: #7a869a;
+  margin-top: 8px;
 }
 
 .charcount {
-    font-size: 12px;
-    color: #7a869a;
-    text-align: right;
-    margin-top: 6px
+  font-size: 12px;
+  color: #7a869a;
+  text-align: right;
+  margin-top: 6px;
 }
 
-hr {
-    margin: 20px 0;
-    border: none;
-    border-top: 1px solid #eef3fb
+/* ------------------------------
+   Actieknoppen
+------------------------------ */
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+button {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 0;
+  background: var(--dark-green-color);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: var(--light-green-color);
+}
+
+button.secondary {
+  background: var(--mid2-gray-color);
+  color: var(--white-color);
+}
+
+button.secondary:hover {
+  background: var(--mid1-gray-color);
+}
+
+/* ------------------------------
+   Feedback / statusberichten
+------------------------------ */
+
+.hint {
+  font-size: 13px;
+  color: #7a869a;
+  margin-top: 10px;
+}
+
+.success {
+  background: #ecfdf5;
+  color: #065f46;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 14px;
+}
+
+.error {
+  background: #fff1f2;
+  color: #7f1d1d;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 14px;
+}
+
+/* ------------------------------
+   Divider lijn
+------------------------------ */
+
+.divider {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #eef3fb;
+}
+
+/* ------------------------------
+   Responsief gedrag
+------------------------------ */
+
+@media (max-width: 600px) {
+  #formContent {
+    width: 95%;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
 }

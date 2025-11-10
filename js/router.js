@@ -1,10 +1,9 @@
-// ✅ router.js — finale versie met lesloader-integratie + actieve tabfix + zoekondersteuning
+// ✅ router.js — finale versie met lesloader-integratie + actieve tabfix + contentUpdated event
 
 const content = document.getElementById("content");
 
 // 🔹 Pagina laden
 async function loadPage(page) {
-  // Bepaal pad
   const path = page === "home" ? "pages/home.html" : `pages/${page}.html`;
 
   try {
@@ -18,7 +17,10 @@ async function loadPage(page) {
     const main = temp.querySelector("main");
     content.innerHTML = main ? main.outerHTML : html;
 
-    // ✅ Active tab bijwerken zodra de pagina geladen is
+    // ✅ Event uitsturen zodra nieuwe content in de DOM staat
+    document.dispatchEvent(new Event('contentUpdated'));
+
+    // ✅ Active tab bijwerken
     setActiveTab(page);
 
     // 🧠 Als we naar de uitlegpagina gaan → laad lessonLoader
@@ -72,7 +74,7 @@ function setupNavLinks() {
       const page = e.target.getAttribute("data-page");
       if (!page) return;
 
-      // ✅ Active tab updaten via helper
+      // ✅ Active tab updaten
       setActiveTab(page);
 
       // ✅ URL bijwerken
@@ -97,6 +99,6 @@ const startPage = location.hash.replace("#", "") || "home";
 loadPage(startPage);
 setActiveTab(startPage);
 
-// ✅ Globaal beschikbaar maken voor search.js
+// ✅ Globaal beschikbaar maken voor andere scripts
 window.loadPage = loadPage;
 window.setActiveTab = setActiveTab;
