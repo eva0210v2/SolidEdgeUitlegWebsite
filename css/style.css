@@ -33,65 +33,96 @@ body {
   line-height: 1.4;
   box-sizing: border-box;
 }
-
 /* =====================================================
    SITE HEADER (titel + zoekbalk)
 ===================================================== */
-
 #siteHeader {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap; /* Laat items vanzelf naar onder springen als het te smal wordt */
   align-items: center;
-  background-color: #01713d;
-  color: white;
-  padding: 10px 20px;
-  position: relative;
-  flex-wrap: wrap; /* zorgt dat op mobiel alles netjes breekt */
-}
-
-#siteTitle {
-  flex: 1;
+  justify-content: space-between;
+  background-color: var(--light-green-color);
+  padding: 1rem 2rem;
   text-align: center;
-  font-size: 1.8rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  gap: 1rem;
 }
 
-/* Zoeksectie rechtsboven */
+/* 🔹 Titel — gecentreerd zolang er ruimte is */
+#siteTitle {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+#siteTitle h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--white-color);
+  margin: 0;
+}
+
+/* 🔹 Zoeksectie — standaard rechts */
 .search-section {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
+/* 🔹 Zoekveld */
 .search-section input[type="text"] {
-  padding: 6px 10px;
-  border-radius: var(--standard-box-border-radius);
-  border: 1px solid var(--white-color);
-  outline: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
   width: 220px;
-  font-family: var(--font-familiy);
-  font-size: var(--font-size);
+  transition: border-color 0.3s ease;
 }
 
+.search-section input[type="text"]:focus {
+  border-color: #888;
+  outline: none;
+}
+
+/* 🔹 Zoekknop */
 .search-section button {
-  padding: 8px 12px;
-  margin-left: 5px;
-  border: none;
-  background-color: var(--blue-color);
+  padding: 0.4rem 0.8rem;
+  background-color: var(--dark-green-color);
   color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: var(--standard-box-border-radius);
-  font-family: var(--font-familiy);
-  font-size: var(--font-size);
+  transition: background-color 0.3s ease;
 }
 
 .search-section button:hover {
-  background-color: var(--light-blue-color);
+  background-color: #025b30;
 }
+
+/* 🔹 Responsief gedrag */
+@media (max-width: 950px) {
+  #siteHeader {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  #siteTitle {
+    flex: 0 0 auto;
+    order: 1;
+  }
+
+  .search-section {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search-section input[type="text"] {
+    width: 80%;
+    max-width: 300px;
+  }
+}
+
 
 /* =====================================================
    NAVIGATIEBALK
