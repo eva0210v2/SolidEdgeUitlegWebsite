@@ -14,7 +14,7 @@ async function searchSite(force = false) {
   // 🔹 1️⃣ manifest.json ophalen
   let lessons = [];
   try {
-    const res = await fetch("functies/manifest.json");
+    const res = await fetch("./functies/manifest.json");
     if (res.ok) lessons = await res.json();
   } catch (err) {
     console.error("❌ Kon manifest niet laden:", err);

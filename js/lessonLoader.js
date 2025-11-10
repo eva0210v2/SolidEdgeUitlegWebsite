@@ -11,7 +11,7 @@ async function loadAllLessons() {
 
   try {
     // 1️⃣ manifest ophalen met alle lessen
-    const manifestRes = await fetch("../functies/manifest.json");
+    const manifestRes = await fetch("./functies/manifest.json");
     if (!manifestRes.ok) throw new Error("Kon manifest.json niet laden");
 
     const lessons = await manifestRes.json();
@@ -19,7 +19,7 @@ async function loadAllLessons() {
     // 2️⃣ door alle lessen loopen
     for (const lesson of lessons) {
   try {
-    const response = await fetch(`../functies/${lesson.name}.html`);
+    const response = await fetch(`./functies/${lesson.name}.html`);
     if (!response.ok) throw new Error(`Bestand niet gevonden: ${lesson.name}`);
 
     const html = await response.text();
