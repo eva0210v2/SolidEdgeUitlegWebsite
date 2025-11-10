@@ -16,6 +16,10 @@
   --standard-border-radius: 10px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: var(--font-familiy);
   font-weight: 400;
@@ -25,13 +29,17 @@ body {
   background-color: var(--white-color);
   color: var(--mid3-gray-color);
   line-height: 1.4;
-  box-sizing: border-box;
 }
 
 /* =====================================================
-   STICKY HEADER (groene balk)
+   SITE HEADER (groene balk)
 ===================================================== */
+
 #siteHeader {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -39,19 +47,16 @@ body {
   background-color: var(--light-green-color);
   padding: 1rem 2rem;
   text-align: center;
-  position: sticky;
-  top: 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  z-index: 1000;
 }
 
 #siteTitle {
   flex: 1 1 auto;
-  text-align: center;
+  text-align: left;
 }
 
 #siteTitle h1 {
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--white-color);
   margin: 0;
@@ -87,14 +92,13 @@ body {
 }
 
 .search-section button:hover {
-  background-color: #025b30;
+  background-color: var(--light-green-color);
 }
 
 /* 🔹 Responsief gedrag */
 @media (max-width: 950px) {
   #siteHeader {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
 
@@ -105,47 +109,61 @@ body {
 }
 
 /* =====================================================
-   STICKY NAVIGATIE ONDER HEADER
+   NAVIGATIE ONDER HEADER
 ===================================================== */
-header {
-  position: sticky;
-  top: 70px; /* hoogte van #siteHeader */
+
+#navHeader {
+  position: relative; /* blijft onder header, niet sticky */
+  width: 100%;
   background-color: var(--mid1-gray-color);
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-  z-index: 999;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  margin: 0;
 }
 
-nav ul {
+#navHeader .nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+#navHeader nav {
+  width: 100%;
+}
+
+#navHeader ul {
+  display: flex;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-nav a {
+#navHeader li {
+  height: 100%;
+}
+
+#navHeader a {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 200px;
+  padding: 0 1.2rem;
   color: var(--white-color);
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
-nav a:hover {
+#navHeader a:hover {
   background-color: var(--mid2-gray-color);
 }
 
-nav a.active {
+#navHeader a.active {
   background-color: var(--mid3-gray-color);
-  color: var(--white-color);
 }
 
 /* =====================================================
@@ -194,7 +212,6 @@ main {
   font-weight: 600;
 }
 
-/* ✅ highlight effect toegevoegd */
 .lesson-content code,
 .lesson-content pre {
   background-color: rgba(1, 139, 61, 0.1);
@@ -220,7 +237,6 @@ main {
   padding: 12px 16px;
 }
 
-/* ✅ optionele extra highlightklasse */
 .highlight {
   background-color: rgba(1, 139, 61, 0.2);
   border-radius: 4px;
@@ -228,14 +244,16 @@ main {
   transition: all 0.4s ease;
 }
 
+/* =====================================================
+   DISCLAIMER
+===================================================== */
 
 #disclaimer {
-font-size: 12px;
-    box-align: center;
-    text-align: center;
-    margin-inline: auto;
-    width: 80%;
-    padding: 10px;
-    border-radius: var(--standard-border-radius);
-    color: var(--mid1-gray-color);
+  font-size: 12px;
+  text-align: center;
+  margin-inline: auto;
+  width: 80%;
+  padding: 10px;
+  border-radius: var(--standard-border-radius);
+  color: var(--mid1-gray-color);
 }

@@ -4,11 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>Solid Edge Educatieve Webtool</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+  <!-- ✅ Bovenste groene balk -->
   <div id="siteHeader">
     <div id="siteTitle">
       <h1><span data-text="siteName"></span></h1>
@@ -19,7 +20,8 @@
     </div>
   </div>
 
-  <header>
+  <!-- ✅ Navigatiebalk direct onder header -->
+  <div id="navHeader">
     <nav>
       <ul class="nav-tabs">
         <li><a href="#" data-page="home" class="active">Home</a></li>
@@ -27,17 +29,20 @@
         <li><a href="#" data-page="feedback">Feedback</a></li>
       </ul>
     </nav>
-  </header>
+  </div>
 
+  <!-- ✅ Hoofdinhoud -->
   <div id="content"></div>
 
+  <!-- ✅ Footer / disclaimer -->
   <footer id="disclaimer">
-  <p>
-    Deze website is een onafhankelijk leerhulpmiddel en niet verbonden aan of goedgekeurd door Siemens Digital Industries
-    Software. Solid Edge is een handelsmerk van Siemens AG.
-  </p>
-</footer>
+    <p>
+      Deze website is een onafhankelijk leerhulpmiddel en niet verbonden aan of goedgekeurd door Siemens Digital
+      Industries Software. Solid Edge is een handelsmerk van Siemens AG.
+    </p>
+  </footer>
 
+  <!-- ✅ Scripts -->
   <script src="./js/config.js"></script>
   <script src="./js/lessonLoader.js"></script>
   <script src="./js/filter.js"></script>
@@ -45,10 +50,8 @@
   <script src="./js/menu.js"></script>
   <script src="./js/search.js"></script>
   <script src="./js/headerLayout.js"></script>
-    <script src="./js/feedbackform.js"></script>
-
+  <script src="./js/feedbackform.js"></script>
   <script src="./js/script.js"></script>
-
 </body>
 
 </html>

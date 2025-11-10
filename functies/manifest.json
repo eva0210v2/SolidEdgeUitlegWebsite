@@ -1,18 +1,18 @@
 [
     {
-        "name": "functie_1_export_step",
-        "title": "Export step file",
+        "name": "functie_ 1_software_openen",
+        "title": "Open de solid edge software",
         "level": "beginner"
     },
     {
-        "name": "functie_2_test123",
-        "title": "test 123",
-        "level": "intermediate"
+        "name": "functie_2_bestand_aanmaken",
+        "title": "Maak een bestand",
+        "level": "beginner"
     },
     {
-        "name": "functie_3",
-        "title": "functie 3",
-        "level": "intermediate"
+        "name": "functie_3_muisbediening",
+        "title": "Muisbediening",
+        "level": "beginner"
     },
     {
         "name": "functie_4_design",
