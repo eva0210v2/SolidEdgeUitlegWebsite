@@ -1,0 +1,288 @@
+/* =====================================================
+   ALGEMENE STIJL & VARIABELEN
+===================================================== */
+
+:root {
+  --white-color: #FFFFFF;
+  --black-color: #000000;
+  --light-green-color: #018b3d;
+  --dark-green-color: #00703d;
+  --blue-color: #0069b3;
+  --red-color: #e20712;
+
+  --light-gray-color: #e8e9e8;
+  --mid1-gray-color: #9e9e9e;
+  --mid2-gray-color: #6f6f6f;
+  --mid3-gray-color: #4f4f4f;
+  --dark-gray-color: #3f3f3f;
+  --light-blue-color: #3c92d0;
+
+  --standard-box-border-radius: 10px;
+  --font-familiy: "Hind", sans-serif;
+  --font-size: 18px;
+}
+
+body {
+  font-family: var(--font-familiy);
+  font-weight: 400;
+  font-size: var(--font-size);
+  margin: 0;
+  padding: 0;
+  background-color: var(--white-color);
+  color: var(--dark-gray-color);
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   SITE HEADER (titel + zoekbalk)
+===================================================== */
+
+#siteHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #01713d;
+  color: white;
+  padding: 10px 20px;
+  position: relative;
+  flex-wrap: wrap; /* zorgt dat op mobiel alles netjes breekt */
+}
+
+#siteTitle {
+  flex: 1;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Zoeksectie rechtsboven */
+.search-section {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.search-section input[type="text"] {
+  padding: 6px 10px;
+  border-radius: var(--standard-box-border-radius);
+  border: 1px solid var(--white-color);
+  outline: none;
+  width: 220px;
+  font-family: var(--font-familiy);
+  font-size: var(--font-size);
+}
+
+.search-section button {
+  padding: 8px 12px;
+  margin-left: 5px;
+  border: none;
+  background-color: var(--blue-color);
+  color: white;
+  cursor: pointer;
+  border-radius: var(--standard-box-border-radius);
+  font-family: var(--font-familiy);
+  font-size: var(--font-size);
+}
+
+.search-section button:hover {
+  background-color: var(--light-blue-color);
+}
+
+/* =====================================================
+   NAVIGATIEBALK
+===================================================== */
+
+header {
+  background-color: var(--mid1-gray-color);
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 200px;
+  color: var(--white-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: var(--mid2-gray-color);
+}
+
+nav a.active {
+  background-color: var(--mid3-gray-color);
+  color: var(--white-color);
+}
+
+/* =====================================================
+   ALGEMENE PAGINA LAY-OUT
+===================================================== */
+
+#content {
+  padding: 2% 4%;
+}
+
+main {
+  padding: 20px;
+  background: white;
+  margin: 20px auto;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* =====================================================
+   SECTIES & PROJECTEN
+===================================================== */
+
+.section {
+  margin: 50px auto;
+  max-width: 600px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.project {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.project:hover {
+  transform: scale(1.02);
+  background-color: #f1f1f1;
+}
+
+/* =====================================================
+   LESSON STIJLEN (uitlegpagina)
+===================================================== */
+
+.lesson-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.lesson.expandable {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease;
+  position: relative;
+}
+
+.lesson-header {
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f7f7;
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+}
+
+.lesson-header:hover {
+  background: #eef3ff;
+}
+
+/* Links: titel, rechts: level + pijltje */
+.lesson-title {
+  text-align: left;
+}
+
+.lesson-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lesson-level {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+}
+
+.lesson-level.beginner { background: #4caf50; }
+.lesson-level.intermediate { background: #ff9800; }
+.lesson-level.advanced { background: #f44336; }
+
+.toggle-icon {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.lesson-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 16px;
+}
+
+/* Hover: kleine preview */
+.lesson.expandable:hover .lesson-content {
+  max-height: 80px;
+  padding: 8px 16px;
+  background: #fafcff;
+}
+
+/* Klik: open */
+.lesson.expandable.open .lesson-content {
+  max-height: 500px;
+  padding: 12px 16px;
+}
+
+/* Pijltje draait */
+.lesson.expandable.open .toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* =====================================================
+   OVERIGE STIJLEN
+===================================================== */
+
+.highlight {
+  background-color: yellow;
+  transition: background-color 0.6s ease;
+}
+
+.filter-menu {
+  margin-bottom: 20px;
+}
+
+#pdfDownload {
+  display: block;
+  margin: 0 auto;
+}

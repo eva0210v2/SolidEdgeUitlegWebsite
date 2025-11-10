@@ -1,0 +1,224 @@
+.gebruiksaanwijzingDiv {
+    width: 50%;
+    text-align: center;
+    margin-inline: auto;
+}
+
+
+.tussenStukje {
+    height: 30px;
+}
+
+.lesson {
+    float: center;
+    text-align: center;
+    margin-inline: auto;
+    background-color: var(--light-gray-color);
+    border-radius: var(--standard-box-border-radius);
+    margin: 10px;
+    padding: 2px;
+}
+
+
+/*  Design van 1 ding */
+#lesson-container {
+    display: center;
+    flex-direction: column;
+    align-items: center;
+    /* centreert horizontaal */
+    justify-content: center;
+    /* centreert verticaal als er ruimte is */
+    width: 500px;
+    padding: 20px 0;
+}
+
+.lesson-header {
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f7f7f7;
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lesson-header:hover {
+    background: #eef3ff;
+}
+
+.toggle-icon {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.lesson-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 16px;
+}
+
+/* 🟦 Hover: kleine preview */
+.lesson.expandable:hover .lesson-body {
+    max-height: 80px;
+    padding: 8px 16px;
+    background: #fafcff;
+}
+
+/* 🟢 Klik: volledig open */
+.lesson.expandable.open .lesson-body {
+    max-height: 500px;
+    padding: 12px 16px;
+}
+
+/* 🔽 Pijltje draait omhoog */
+.lesson.expandable.open .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* ====== LESSECTIES (uitklapbaar + hover) ====== */
+
+.lesson.expandable {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.lesson.expandable:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+/* 🔹 Header bovenaan de les */
+.lesson-header {
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fc;
+    cursor: pointer;
+    user-select: none;
+}
+
+.lesson-header:hover {
+    background: #eef3ff;
+}
+
+/* 🔹 Linker titel */
+.lesson-title {
+    font-weight: 600;
+    color: #222;
+    font-size: 1rem;
+}
+
+/* 🔹 Rechterkant: level label + pijltje */
+.lesson-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 🔸 Level label (met kleur per niveau) */
+.lesson-level {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    color: white;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.lesson-level.beginner {
+    background-color: #4caf50;
+}
+
+/* groen */
+.lesson-level.intermediate {
+    background-color: #ff9800;
+}
+
+/* oranje */
+.lesson-level.expert {
+    background-color: #f44336;
+}
+
+/* rood */
+
+/* 🔻 Pijltje rechts */
+.toggle-icon {
+    font-size: 16px;
+    color: #555;
+    transition: transform 0.3s ease;
+}
+
+/* 🔸 Content (verstopt totdat open) */
+.lesson-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 16px;
+    background: #fff;
+    text-align: left;
+}
+
+/* 🟦 Hover: korte preview */
+.lesson.expandable:hover .lesson-content {
+    max-height: 80px;
+    padding: 8px 16px;
+    background: #fafcff;
+}
+
+/* 🟢 Klik (open): volledig tonen */
+.lesson.expandable.open .lesson-content {
+    max-height: 500px;
+    padding: 16px;
+}
+
+/* 🔼 Draai pijltje omhoog */
+.lesson.expandable.open .toggle-icon {
+    transform: rotate(180deg);
+}
+
+
+/* Zorg dat de hele pagina netjes centreert */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Container waar alle lessen in komen */
+#lesson-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centreer horizontaal */
+  justify-content: center;
+  width: 100%;
+  max-width: 800px; /* niet te breed, ziet er mooier uit */
+  margin: 0 auto;
+  gap: 16px; /* ruimte tussen lessen */
+}
+
+/* Elke individuele lesson */
+.lesson.expandable {
+  width: 100%;
+  max-width: 700px; /* of wat je mooi vindt */
+  text-align: left; /* zorg dat tekst niet in het midden staat */
+}
+
+/* Optioneel: zorg dat filter ook in het midden staat */
+.filterDiv {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.highlight {
+  background-color: red;
+  transition: background-color 0.6s ease;
+}
