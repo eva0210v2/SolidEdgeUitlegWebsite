@@ -1,4 +1,3 @@
-// --- search.js ---
 // Zoekt over de hele site, ook vanaf Home, met highlight + smooth scroll
 
 async function searchSite(force = false) {
