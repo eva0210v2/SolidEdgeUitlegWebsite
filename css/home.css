@@ -4,12 +4,14 @@
 
 }
 
-.newFunction {
+#newFunction {
+    /* Dit werkt nog niet helemaal  */
     box-align: center;
+    color: red;
     /* max-width: fit-content; */
     width: 80%;
     margin-inline: auto;
-    background-color: var(--light-gray-color);
+    background-color: var(--mid1-gray-color);
 }
 
 

@@ -13,6 +13,7 @@
 
   --font-familiy: "Hind", sans-serif;
   --font-size: 18px;
+  --standard-border-radius: 10px;
 }
 
 body {
@@ -225,4 +226,16 @@ main {
   border-radius: 4px;
   box-shadow: 0 0 8px 3px rgba(1, 139, 61, 0.6);
   transition: all 0.4s ease;
+}
+
+
+#disclaimer {
+font-size: 12px;
+    box-align: center;
+    text-align: center;
+    margin-inline: auto;
+    width: 80%;
+    padding: 10px;
+    border-radius: var(--standard-border-radius);
+    color: var(--mid1-gray-color);
 }
