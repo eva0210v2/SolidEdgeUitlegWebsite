@@ -1,17 +1,52 @@
 <!-- Ik wil dat mesen hier een vraag kunnen stellen of feedback sturen zodat ik een mail ontvang 
  waarin ik zie wat mensen willen en kan ik nieuwe uitleg toevoegen -->
 
-<div id="content">
-    <h2>Terugkoppeling</h2>
-    <p>Laat ons weten wat je van de website vindt!</p>
-    <p>Laat ons weten wat je van de website vindt!</p>
-    <p>Chicken ons weten wat je van de website vindt!</p>
-    <p>Laat ons weten wat je van de website vindt!</p>
-    <p>Laat ons weten wat je van de website vindt! <br> 
-        ik wil ook graag weten wat je vind
+<div id="formContent">
+
+    <p class="lead">Laat je naam en wat je anders zou willen zien. Dit stuurt een mailtje zodat ik je feedback ontvang.
     </p>
-    <p>Laat ons weten wat je van de website vindt!</p>
-    <p>Laat ons weten wat je van de website vindt!</p>
-    <p>Laat ons weten wat je van de website vindt!</p>
+
+
+    <!--
+Belangrijke instructies (vervang deze waarden):
+1) Als je wilt dat het formulier een e-mail opent in de gebruiker z'n mailprogramma, pas `RECIPIENT_EMAIL` hieronder aan.
+2) Als je wilt dat het formulier rechtstreeks via een service wordt verzonden (aanbevolen voor betrouwbaarheid), maak een gratis Formspree- of FormKeep-formulier en vervang FORM_ENDPOINT.
+-->
+
+
+    <div id="feedbackForm">
+        <label for="name">Naam</label>
+        <input id="name" name="name" type="text" placeholder="Jouw naam" required />
+
+
+        <label for="message" style="margin-top:12px">Wat zou je graag anders willen zien / vertel probleem</label>
+        <textarea id="message" name="message" maxlength="2000"
+            placeholder="Beschrijf hier kort wat je anders zou willen zien of welk probleem je tegenkomt"
+            required></textarea>
+        <div class="charcount" id="charcount">0 / 2000</div>
+
+
+        <div class="actions">
+            <button type="submit">Verstuur</button>
+            <button type="button" class="secondary" id="mailtoBtn">Open in e-mailprogramma</button>
+        </div>
+
+
+        <div class="hint">Tip: als je geen server-side oplossing hebt, kun je op "Open in e-mailprogramma" klikken — dat
+            opent een nieuw e-mailconcept met jouw bericht (werkt alleen als de gebruiker een mailclient heeft
+            ingesteld).</div>
+
+
+        <div id="result" role="status" aria-live="polite"></div>
+    </div>
+
+
+    <hr style="margin:20px 0;border:none;border-top:1px solid #eef3fb" />
 
 </div>
+
+<head>
+    <link rel="stylesheet" href="css/feedback.css">
+    <script src="./js/feedbackform.js"></script>
+
+</head>
