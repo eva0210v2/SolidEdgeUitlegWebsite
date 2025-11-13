@@ -13,31 +13,24 @@
 
 <body>
   <!-- ✅ Bovenste groene balk -->
-<div id="stickyTop">
-  <div id="siteHeader">
-    <div id="siteTitle">
-      <h1><span data-text="siteName"></span></h1>
+  <div id="stickyTop">
+    <div id="siteHeader">
+      <div id="siteTitle">
+        <h1><span data-text="siteName"></span></h1>
+      </div>
     </div>
-    <div class="search-section">
-  <div class="search-wrapper">
-    <input type="text" id="search" placeholder="Zoek een functie...">
-    <ul id="search-suggestions"></ul> <!-- 🔹 Voeg deze regel toe -->
-  </div>
-  <button onclick="searchSite(true)">Zoeken</button>
-</div>
-  </div>
 
-  <!-- ✅ Navigatie direct onder header -->
-  <div id="navHeader">
-    <nav>
-      <ul class="nav-tabs">
-        <li><a href="#" data-page="home" class="active">Home</a></li>
-        <li><a href="#" data-page="uitleg">Uitleg</a></li>
-        <li><a href="#" data-page="feedback">Feedback</a></li>
-      </ul>
-    </nav>
+    <!-- ✅ Navigatie direct onder header -->
+    <div id="navHeader">
+      <nav>
+        <ul class="nav-tabs">
+          <li><a href="#" data-page="home" class="active">Home</a></li>
+          <li><a href="#" data-page="uitleg">Uitleg</a></li>
+          <li><a href="#" data-page="feedback">Feedback</a></li>
+        </ul>
+      </nav>
+    </div>
   </div>
-</div>
 
   <!-- ✅ Hoofdinhoud -->
   <div id="content"></div>
@@ -58,6 +51,7 @@
   <script src="./js/menu.js"></script>
   <script src="./js/search.js"></script>
   <script src="./js/headerLayout.js"></script>
+  <script src="/js/scrollTop.js"></script>
   <script src="./js/feedbackform.js"></script>
   <script src="./js/script.js"></script>
 </body>

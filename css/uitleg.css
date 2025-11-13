@@ -1,107 +1,466 @@
-/* ======= CONTAINER ======= */
-#lesson-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
+/* Layout + lesson visuals — uses global color variables from style.css */
+
+:root {
+  --uitleg-max-width: 1100px;
+  --control-height: 48px;
+  --control-radius: 10px;
 }
 
-/* ======= LES-BOX ======= */
-.lesson.expandable {
-  width: 100%;
-  max-width: 700px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+/* Base/layout helpers */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+main {
+  max-width: var(--uitleg-max-width);
+  margin: 20px auto;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-  text-align: left;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.lesson.expandable:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
-}
-
-/* ======= HEADER ======= */
-.lesson-header {
+/* Controls row layout (centered group, search left + filter right) */
+.controls-row {
   display: flex;
-  justify-content: space-between;
+  gap: 16px;
   align-items: center;
-  padding: 14px 16px;
-  background: #f8f9fc;
-  cursor: pointer;
-  user-select: none;
-  font-weight: 600;
-  transition: background 0.2s ease;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 18px;
 }
 
-.lesson-header:hover {
-  background: #eef3ff;
+
+/* Lichtgrijze achtergrond voor zoeksectie */
+.controls-row {
+  background-color: var(--mid-light-gray-color);
+  /* of var(--mid1-gray-color) als je geen nieuwe var wilt */
+  padding: 20px 24px;
+  border-radius: var(--standard-border-radius);
+  margin-bottom: 28px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-.lesson-title {
-  font-size: 1rem;
-  color: #222;
+/* Search block and filter sizing */
+.search-and-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 720px;
+  max-width: 760px;
+  min-width: 320px;
+  position: relative;
 }
 
-.lesson-controls {
+.search-bar-comment {
+
+  color: var(--mid2-gray-color); 
+}
+
+.filter-wrapper {
+  flex: 0 0 220px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  position: relative;
+}
+
+/* Input + button alignment */
+.search-wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
+}
+
+/* 🔽 Toevoeging: perfecte horizontale uitlijning */
+#search,
+#search-btn {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* Input */
+#search {
+  flex: 1;
+  height: var(--control-height);
+  padding: 0 14px;
+  line-height: normal;
+  /* 🔽 aangepast */
+  border-radius: var(--control-radius);
+  border: 1px solid var(--mid1-gray-color);
+  background: var(--white-color);
+  color: var(--mid3-gray-color);
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+#search::placeholder {
+  color: rgba(0, 0, 0, 0.36);
+}
+
+#search:focus {
+  border-color: var(--light-green-color);
+  box-shadow: 0 8px 24px rgba(1, 139, 61, 0.08);
+}
+
+/* Prominent search button — green accent, same height as input */
+#search-btn {
+  min-width: 96px;
+  height: var(--control-height);
+  padding: 0 16px;
+  /* 🔽 aangepast om hoogte consistent te houden */
+  border-radius: var(--control-radius);
+  border: none;
+  background: linear-gradient(180deg, var(--dark-green-color), var(--light-green-color));
+  color: var(--white-color);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 26px rgba(1, 139, 61, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+#search-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+#search-btn:active {
+  transform: translateY(0);
+}
+
+/* Suggestions dropdown */
+#search-suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  max-height: 280px;
+  overflow: auto;
+  z-index: 1200;
+  padding: 6px;
+  display: none;
+  border-radius: var(--control-radius);
+  background: var(--white-color);
+  border: 1px solid var(--mid1-gray-color);
+  box-shadow: 0 14px 40px rgba(16, 24, 40, 0.06);
+  box-sizing: border-box;
+}
+
+#search-suggestions .suggestion {
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--mid3-gray-color);
+}
+
+#search-suggestions .suggestion:hover,
+#search-suggestions .suggestion:focus {
+  background: rgba(1, 139, 61, 0.08);
+}
+
+#search-suggestions .no-suggestion {
+  color: var(--mid2-gray-color);
+  padding: 10px 12px;
+}
+
+/* Filter select styling */
+#levelFilter {
+  width: 100%;
+  height: var(--control-height);
+  padding: 10px 40px 10px 12px;
+  border-radius: var(--control-radius);
+  border: 1px solid var(--mid1-gray-color);
+  background: var(--white-color);
+  color: var(--mid3-gray-color);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.filter-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+  color: var(--mid2-gray-color);
+  font-size: 0.95rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Lesson container layout */
+#lesson-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+  margin-bottom: 40px;
+}
+
+/* Lesson card visuals — green theme from global stylesheet */
+.lesson {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lesson.expandable {
+  background: var(--white-color);
+  border: 1px solid var(--mid1-gray-color);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* Header / title */
+.lesson-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.lesson-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--mid3-gray-color);
+}
+
+/* Controls in header (level badge + toggle) */
+.lesson-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .lesson-level {
-  font-size: 0.8rem;
-  padding: 4px 8px;
-  border-radius: 12px;
-  color: white;
-  text-transform: capitalize;
-  font-weight: 500;
+  font-size: 0.82rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--white-color);
+  white-space: nowrap;
+  font-weight: 600;
 }
 
+/* Level colors — mapped to your global green palette */
 .lesson-level.beginner {
-  background-color: #4caf50;
+  background: var(--dark-green-color);
 }
 
 .lesson-level.intermediate {
-  background-color: #ff9800;
+  background: var(--mid1-gray-color);
+  color: var(--white-color);
 }
 
-.lesson-level.expert {
-  background-color: #f44336;
+.lesson-level.advanced {
+  background: #c62828;
 }
 
-/* ======= CONTENT (ANIMATIE) ======= */
-.lesson-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
-  padding: 0 16px;
-  background: #fff;
-}
-
-.lesson.expandable.open .lesson-content {
-  max-height: 500px;
-  padding: 16px;
-}
-
-/* ======= ICON ======= */
+/* Toggle icon */
 .toggle-icon {
-  font-size: 16px;
-  color: #555;
-  transition: transform 0.3s ease;
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 180ms ease;
+  font-size: 0.95rem;
+  color: var(--mid3-gray-color);
 }
 
 .lesson.expandable.open .toggle-icon {
   transform: rotate(180deg);
 }
 
-/* ======= HIGHLIGHT ======= */
-.lesson.highlight {
-  background-color: #c8f7dc !important;
-  box-shadow: 0 0 15px 5px #4caf50 !important;
-  border: 2px solid #4caf50 !important;
+/* Collapse/expand content */
+.lesson-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 330ms ease, opacity 260ms ease, padding 180ms ease;
+  padding: 0 16px;
+  background: transparent;
 }
+
+.lesson.expandable.open .lesson-content {
+  max-height: 2000px;
+  opacity: 1;
+  padding: 12px 16px;
+  transition: max-height 420ms ease, opacity 260ms ease, padding 180ms ease;
+}
+
+/* Fallback list item styling */
+li[data-lesson] {
+  list-style: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Highlight style — green accent + fade animation */
+.lesson.highlight,
+.lesson.expandable.highlight {
+  background: linear-gradient(90deg, rgba(1, 139, 61, 0.08), rgba(255, 255, 255, 0.95));
+  border-left: 6px solid var(--dark-green-color);
+  box-shadow: 0 12px 36px rgba(1, 139, 61, 0.07);
+  z-index: 3;
+  transition: box-shadow 300ms ease, background-color 300ms ease;
+}
+
+@keyframes highlightFadeGreen {
+  0% {
+    background-color: rgba(1, 139, 61, 0.08);
+  }
+
+  60% {
+    background-color: rgba(1, 139, 61, 0.03);
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+.lesson.highlight {
+  animation: highlightFadeGreen 3s forwards;
+}
+
+/* Accessibility focus */
+.lesson:focus-within {
+  outline: none;
+  box-shadow: 0 8px 30px rgba(1, 139, 61, 0.04);
+}
+
+/* Scroll-to-top button — green theme */
+#scroll-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1400;
+  padding: 10px 14px;
+  border-radius: var(--control-radius);
+  cursor: pointer;
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform 240ms ease, opacity 240ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: var(--dark-green-color);
+  color: var(--white-color);
+  box-shadow: 0 8px 22px rgba(1, 139, 61, 0.18);
+  font-weight: 600;
+}
+
+#scroll-top.hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+#scroll-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#scroll-top:hover {
+  filter: brightness(1.08);
+}
+
+/* Responsive tweaks */
+@media (max-width: 920px) {
+  .controls-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .filter-wrapper {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .search-and-btn {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  #search-suggestions {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* Forceer uniforme uitlijning en reset browser-variaties */
+.search-wrapper>#search,
+.search-wrapper>#search-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+  height: var(--control-height) !important;
+  margin: 0 !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  line-height: normal !important;
+}
+
+/* Voorkom verticale padding die de hoogte vergroot */
+.search-wrapper>#search {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+  border-radius: var(--control-radius) !important;
+}
+
+/* Knop padding horizontaal houden, verticale padding nul */
+.search-wrapper>#search-btn {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  min-width: 96px;
+  /* hover translate mag eruit tijdens testen (zorgt voor tijdelijke 'zweef'-illusie) */
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+/* Optionele extra: maak sure dat hover niet permanent 'verschoven' lijkt */
+#search-btn:hover {
+  transform: translateY(-2px);
+}
+
+#search-btn:active {
+  transform: translateY(0);
+}
+
+/* Als je nog steeds verschil ziet: zet tijdelijk deze debug-styles aan */
+/*
+.search-wrapper > * { outline: 1px dashed hotpink !important; }
+*/

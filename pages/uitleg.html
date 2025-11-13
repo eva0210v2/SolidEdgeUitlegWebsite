@@ -1,44 +1,37 @@
-<div id="content">
-    <main>
-    <label for="levelFilter">Filter op niveau:</label>
-    <select id="levelFilter">
+<main>
+  <!-- Controls row: zoekveld + knop + filter -->
+  <div class="controls-row">
+    <div class="search-and-btn">
+      <div class="search-wrapper">
+        <input id="search" type="text" placeholder="Zoek lessons..." autocomplete="off" />
+        <button id="search-btn" type="button" aria-label="Zoek">Zoeken</button>
+      </div>
+
+      <!-- Suggesties dropdown (wordt getoggled door search.js) -->
+      <div id="search-suggestions" role="listbox" aria-label="Zoeksuggesties"></div>
+    </div>
+
+    <div class="filter-wrapper">
+      <label for="levelFilter" class="visually-hidden">Filter op niveau</label>
+      <select id="levelFilter" aria-label="Filter op niveau">
         <option value="all">Alle niveaus</option>
         <option value="beginner">Beginner</option>
         <option value="intermediate">Intermediate</option>
         <option value="advanced">Advanced</option>
-    </select> 
-
-    <!-- <div class="lesson" data-level="beginner">.beginner..</div>
-    <div class="lesson" data-level="intermediate">.intermediate..</div>
-    <div class="lesson" data-level="advanced">.advanced..</div>
-    <div class="lesson" data-level="intermediate"> .intermediate..</div>
-    <div class="lesson" data-level="intermediate"> .intermediate..</div>
-    <div class="lesson" data-level="intermediate"> .intermediate..</div> -->
-
-    <!-- <div class="lesson" data-level="intermediate">
-
-
-        <h3>STEP files exporten</h3>
-        <div id=pdfDownload>
-            <a href="pdf/STEP_File_Export.pdf" download="Stappenplan-STEPfile-Export.pdf">
-                📄 download tutorial als pdf
-            </a>
-            <br>
-            <br>
-            <a href="pdf/STEP_File_Export.pdf" target="_blank">Lees in nieuw tabblad</a>
-
-        </div>
-    </div> -->
-    <p> <br></p>
-
-        <div id="lesson-container"></div>
-    </main>
-    <div>
-        <p> Dit is het einde van de container </p>
+      </select>
     </div>
-    >
+  </div>
+  <div class="search-bar-comment"> 
+    <p>  Zie je geen suggestiebalk als je iets in de zoekbalk typt? Herlaad dan de pagina met cntrl+shift+r</p>
+    </div>
 
 
 
+  <div style="height:8px;"></div>
 
-    <!-- ===================  =================== -->
+  <!-- Container voor door lessonLoader gegenereerde lessons -->
+  <div id="lesson-container"></div>
+</main>
+
+<!-- Scroll to top knop (voeg in page-fragment zodat het overal consistent is) -->
+<button id="scroll-top" aria-label="Scroll naar top">Scroll naar top</button>
