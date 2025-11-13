@@ -36,10 +36,16 @@ async function loadPage(page) {
     // Active tab updaten
     setActiveTab(page);
 
-    // History pushState
-    if (window.location.hash.replace("#","") !== page) {
-      window.history.pushState({ page }, "", `#${page}`);
+    // Zoekbalk alleen tonen op uitleg pagina
+    const searchSection = document.querySelector(".search-section");
+    if (page === "uitleg") {
+      searchSection?.classList.add("visible");
+    } else {
+      searchSection?.classList.remove("visible");
     }
+
+    // History pushState
+    window.history.pushState({ page }, "", `#${page}`);
 
     // Handshake klaarzetten (voor lessonLoader)
     if (!window.lessonLoaderHandshake) {

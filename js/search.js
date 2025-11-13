@@ -9,157 +9,189 @@ document.addEventListener("lessonsReady", (e) => {
   console.log("✅ Lessen geladen:", loadedLessonNames);
 });
 
-// Wacht tot lesson daadwerkelijk in de DOM staat
 function waitForLessonInDOM(lessonName, timeout = 5000) {
   return new Promise(resolve => {
     const start = Date.now();
     const check = () => {
-      const el = document.querySelector(`[data-lesson='${lessonName}']`);
-      if (el) {
-        resolve(el);
-      } else if (Date.now() - start < timeout) {
-        requestAnimationFrame(check);
-      } else {
-        resolve(null);
-      }
+      const el = document.querySelector(`#lesson-container .lesson[data-lesson="${lessonName}"]`);
+      if (el) return resolve(el);
+      if (Date.now() - start > timeout) return resolve(null);
+      setTimeout(check, 100);
     };
     check();
   });
 }
 
-function waitForLessonsReady(lessonName) {
+function waitForLessonsReady() {
   return new Promise(resolve => {
-    if (document.querySelector(`[data-lesson='${lessonName}']`)) {
-      resolve();
-      return;
-    }
-
-    if (lessonsLoadedFlag && loadedLessonNames.includes(lessonName)) {
-      resolve();
-      return;
-    }
-
-    function onReady(e) {
-      if (e.detail.lessons.includes(lessonName)) {
-        document.removeEventListener("lessonsReady", onReady);
-        resolve();
-      }
-    }
-    document.addEventListener("lessonsReady", onReady);
-
-    setTimeout(() => {
-      document.removeEventListener("lessonsReady", onReady);
-      resolve();
-    }, 5000);
+    if (lessonsLoadedFlag) return resolve();
+    document.addEventListener("lessonsReady", () => resolve(), { once: true });
   });
 }
 
 async function searchSite(force = false) {
   const input = document.getElementById("search");
+  if (!input) return;
   const term = input.value.trim().toLowerCase();
-
   if (!term) return;
 
-  let lessons = [];
+  console.log("🔍 Zoeken naar:", term);
+
+  let manifest = [];
   try {
-    const res = await fetch("./functies/manifest.json");
-    if (res.ok) lessons = await res.json();
+    const resp = await fetch("functies/manifest.json");
+    manifest = await resp.json();
   } catch (err) {
-    console.error("❌ Kon manifest niet laden:", err);
-    return;
+    console.warn("Kon manifest niet laden:", err);
   }
 
-  const match = lessons.find(
-    l => l.name.toLowerCase() === term || l.title.toLowerCase() === term
+  const match = manifest.find(
+    l => l.name.toLowerCase() === term
+      || l.title.toLowerCase() === term
+      || l.name.toLowerCase().includes(term)
+      || l.title.toLowerCase().includes(term)
   );
 
   if (!match) {
-    alert("Geen resultaten gevonden 😕");
+    console.log("Geen match gevonden voor:", term);
     return;
   }
 
+  console.log("✅ Match gevonden:", match);
   const lessonName = match.name;
-  window.pendingSearchLesson = lessonName;
 
-  if (typeof loadPage === "function") {
-    await loadPage("uitleg");
-  }
+  const currentPage = window.currentPage || window.location.hash.replace("#", "") || "home";
 
-  await waitForLessonsReady(lessonName);
-
-  // Wacht nu ook tot element in DOM staat
-  const lessonEl = await waitForLessonInDOM(lessonName);
-  if (!lessonEl) {
-    console.warn("Lesson DOM element niet gevonden:", lessonName);
+  if (currentPage !== "uitleg") {
+    window.pendingSearchLesson = lessonName;
+    window.location.hash = "uitleg";
     return;
   }
 
-  highlightLesson(lessonEl);
+  await waitForLessonsReady();
+  const lessonEl = await waitForLessonInDOM(lessonName, 7000);
+  if (!lessonEl) {
+    console.warn("❌ Lesson DOM element niet gevonden:", lessonName);
+    return;
+  }
+
+  console.log("✅ Lesson element gevonden, highlighting...");
+
+  if (typeof window.highlightLesson === "function") {
+    try {
+      window.highlightLesson(lessonName);
+    } catch (err) {
+      console.warn("window.highlightLesson faalde, fallback:", err);
+      localHighlightFallback(lessonEl);
+    }
+  } else {
+    localHighlightFallback(lessonEl);
+  }
 
   window.pendingSearchLesson = null;
 }
 
-// Highlight nu element zelf
-function highlightLesson(target) {
-  if (!target) return;
+function localHighlightFallback(target) {
+  const el = (typeof target === "string")
+    ? document.querySelector(`#lesson-container .lesson[data-lesson="${target}"]`)
+    : target;
+  if (!el) return;
+  if (el.classList.contains("search-locked")) return;
 
-  if (target.classList.contains("search-locked")) return;
+  document.querySelectorAll("#lesson-container .lesson.expandable.open").forEach(e => e.classList.remove("open"));
+  el.classList.add("open");
 
-  document.querySelectorAll(".lesson.expandable.open")
-    .forEach(el => el.classList.remove("open"));
-
-  target.classList.add("open");
-
-  // Wacht tot max-height animatie klaar is
   setTimeout(() => {
-    target.scrollIntoView({ behavior: "smooth", block: "center" });
-    target.classList.add("highlight");
-    setTimeout(() => target.classList.remove("highlight"), 3000);
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    el.classList.add("highlight");
+    setTimeout(() => el.classList.remove("highlight"), 3000);
   }, 410);
 }
 
-// Enter key search
 document.getElementById("search")?.addEventListener("keydown", e => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    searchSite(true);
-  }
+  if (e.key === "Enter") searchSite();
 });
 
-// Suggesties
 const searchInput = document.getElementById("search");
 const suggestionBox = document.getElementById("search-suggestions");
 
+// Ensure suggestionBox exists and is initially hidden
+if (suggestionBox) {
+  suggestionBox.style.display = "none";
+  suggestionBox.classList.add("search-suggestions");
+}
+
 if (searchInput && suggestionBox) {
   searchInput.addEventListener("input", async e => {
-    const term = e.target.value.trim().toLowerCase();
-
-    if (!term) {
-      suggestionBox.style.display = "none";
+    const q = e.target.value.trim().toLowerCase();
+    if (!q) {
       suggestionBox.innerHTML = "";
+      suggestionBox.style.display = "none";
       return;
     }
 
-    const res = await fetch("./functies/manifest.json");
-    const data = await res.json();
+    try {
+      const resp = await fetch("functies/manifest.json");
+      const manifest = await resp.json();
+      const suggestions = manifest
+        .filter(m => m.title.toLowerCase().includes(q) || m.name.toLowerCase().includes(q))
+        .slice(0, 6);
 
-    const matches = data.filter(
-      l => l.title.toLowerCase().includes(term) || l.name.toLowerCase().includes(term)
-    );
+      if (suggestions.length === 0) {
+        suggestionBox.innerHTML = `<div class="no-suggestion">Geen resultaten</div>`;
+        suggestionBox.style.display = "block";
+        return;
+      }
 
-    suggestionBox.innerHTML = matches.map(
-      m => `<li data-lesson="${m.name}">${m.title}</li>`
-    ).join("");
+      suggestionBox.innerHTML = suggestions
+        .map(s => `<div class="suggestion" data-name="${s.name}" tabindex="0">${s.title}</div>`)
+        .join("");
+      suggestionBox.style.display = "block";
+    } catch (err) {
+      console.warn("Suggesties laden mislukt:", err);
+      suggestionBox.innerHTML = "";
+      suggestionBox.style.display = "none";
+    }
+  });
 
-    suggestionBox.style.display = matches.length ? "block" : "none";
+  // Use event delegation for clicks and keyboard selection
+  suggestionBox.addEventListener("click", (ev) => {
+    const el = ev.target.closest(".suggestion");
+    if (!el) return;
+    const name = el.getAttribute("data-name");
+    if (!name) return;
+    searchInput.value = el.textContent;
+    window.pendingSearchLesson = name;
+    const currentPage = window.currentPage || window.location.hash.replace("#", "") || "home";
+    if (currentPage !== "uitleg") {
+      window.location.hash = "uitleg";
+    } else {
+      searchSite();
+    }
+    suggestionBox.style.display = "none";
+  });
 
-    suggestionBox.querySelectorAll("li").forEach(li => {
-      li.addEventListener("click", () => {
-        searchInput.value = li.textContent;
-        suggestionBox.style.display = "none";
-        searchSite(true);
-      });
-    });
+  suggestionBox.addEventListener("keydown", (ev) => {
+    if (ev.key === "Enter") {
+      const el = document.activeElement;
+      if (el && el.classList.contains("suggestion")) {
+        el.click();
+      }
+    }
+  });
+
+  // Hide suggestions when clicking outside
+  document.addEventListener("click", (ev) => {
+    if (!searchInput.contains(ev.target) && !suggestionBox.contains(ev.target)) {
+      suggestionBox.style.display = "none";
+    }
+  });
+
+  // Optional: show suggestions again on focus if there is input
+  searchInput.addEventListener("focus", () => {
+    if (searchInput.value.trim() && suggestionBox.innerHTML.trim()) {
+      suggestionBox.style.display = "block";
+    }
   });
 }
 

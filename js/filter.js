@@ -1,7 +1,6 @@
 // ✅ filter.js — alleen verantwoordelijk voor tonen/verbergen van lessen
 (function () {
 
-  // Hulp: pas filter toe op basis van huidige selectie
   function applyFilter(selected) {
     const items = document.querySelectorAll("[data-level]");
     const sel = (selected || "all").toLowerCase();
@@ -12,26 +11,22 @@
     });
   }
 
-  // 1️⃣ Filter op dropdown change (werkt ook na router-load)
+  // Filter op dropdown change
   document.addEventListener("change", (e) => {
     if (e.target && e.target.matches("#levelFilter")) {
       applyFilter(e.target.value);
     }
   });
 
-  // 2️⃣ Herstel filter na content-wijziging (door router.js)
-  const content = document.getElementById("content");
-  if (content) {
-    const mo = new MutationObserver(() => {
-      const select = document.getElementById("levelFilter");
-      if (select) {
-        applyFilter(select.value || "all");
-      }
-    });
-    mo.observe(content, { childList: true, subtree: true });
-  }
+  // Herstel filter na content-wijziging
+  document.addEventListener("contentUpdated", () => {
+    const select = document.getElementById("levelFilter");
+    if (select) {
+      applyFilter(select.value || "all");
+    }
+  });
 
-  // 3️⃣ Eerste keer toepassen
+  // Eerste keer toepassen
   window.addEventListener("load", () => {
     const select = document.getElementById("levelFilter");
     if (select) applyFilter(select.value || "all");

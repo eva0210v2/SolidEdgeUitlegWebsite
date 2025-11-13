@@ -28,6 +28,10 @@ body {
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 /* =====================================================
    STICKY HEADER + NAV SAMEN
 ===================================================== */
@@ -70,10 +74,14 @@ body {
 ===================================================== */
 
 .search-section {
-  display: flex;
+  display: none;
   align-items: flex-start;
   gap: 0.5rem;
   position: relative;
+}
+
+.search-section.visible {
+  display: flex;
 }
 
 .search-wrapper {
@@ -148,7 +156,6 @@ body {
   background-color: #025b30;
 }
 
-/* 🔹 Responsief gedrag */
 @media (max-width: 950px) {
   #siteHeader {
     flex-direction: column;
@@ -156,7 +163,7 @@ body {
     align-items: center;
   }
 
-  .search-section {
+  .search-section.visible {
     width: 100%;
     flex-direction: column;
   }
@@ -178,7 +185,7 @@ body {
 
 #navHeader {
   position: sticky;
-  top: 70px; /* direct onder de groene header */
+  top: 70px;
   z-index: 999;
   background-color: var(--mid1-gray-color);
   box-shadow: 0 2px 4px rgba(0,0,0,0.08);
@@ -236,13 +243,8 @@ main {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ Zorg dat de scrollbar altijd zichtbaar is (voorkomt verspringen) */
-html {
-  overflow-y: scroll;
-}
-
-footer{
+footer {
   color: var(--mid2-gray-color);
   text-align: center;
-  font-size: 15px;;
+  font-size: 15px;
 }

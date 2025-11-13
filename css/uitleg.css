@@ -1,3 +1,12 @@
+/* ======= CONTAINER ======= */
+#lesson-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
 /* ======= LES-BOX ======= */
 .lesson.expandable {
   width: 100%;
@@ -26,6 +35,7 @@
   cursor: pointer;
   user-select: none;
   font-weight: 600;
+  transition: background 0.2s ease;
 }
 
 .lesson-header:hover {
@@ -52,9 +62,17 @@
   font-weight: 500;
 }
 
-.lesson-level.beginner { background-color: #4caf50; }
-.lesson-level.intermediate { background-color: #ff9800; }
-.lesson-level.expert { background-color: #f44336; }
+.lesson-level.beginner {
+  background-color: #4caf50;
+}
+
+.lesson-level.intermediate {
+  background-color: #ff9800;
+}
+
+.lesson-level.expert {
+  background-color: #f44336;
+}
 
 /* ======= CONTENT (ANIMATIE) ======= */
 .lesson-content {
@@ -82,7 +100,8 @@
 }
 
 /* ======= HIGHLIGHT ======= */
-.highlight {
-   background-color: yellow !important;
-  box-shadow: 0 0 10px 5px orange !important;
+.lesson.highlight {
+  background-color: #c8f7dc !important;
+  box-shadow: 0 0 15px 5px #4caf50 !important;
+  border: 2px solid #4caf50 !important;
 }
