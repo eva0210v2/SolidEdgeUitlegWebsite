@@ -2,8 +2,8 @@
    FEEDBACK FORM STYLING
    ----------------------------------------------------------- */
 #koptekst{
-    text-align: center;
-}
+  text-align: center;
+  margin-bottom: 20px;}
 #formContent {
   width: 80%;
   margin: auto;
@@ -13,12 +13,6 @@
 /* ------------------------------
    Tekst en labels
 ------------------------------ */
-
-p.lead {
-  margin-bottom: 18px;
-  color: #505f79;
-  line-height: 1.5;
-}
 
 label {
   display: block;
@@ -39,7 +33,7 @@ textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid var(--mid1-gray-color);
-  border-radius: 8px;
+  border-radius: var(--standard-border-radius);
   font-family: inherit;
   font-size: 15px;
   margin-bottom: 18px;
@@ -51,22 +45,6 @@ textarea {
   resize: vertical;
 }
 
-/* ------------------------------
-   Kleine tekst / meta info
------------------------------- */
-
-.meta {
-  font-size: 13px;
-  color: #7a869a;
-  margin-top: 8px;
-}
-
-.charcount {
-  font-size: 12px;
-  color: #7a869a;
-  text-align: right;
-  margin-top: 6px;
-}
 
 /* ------------------------------
    Actieknoppen
@@ -83,7 +61,7 @@ button {
   border-radius: 8px;
   border: 0;
   background: var(--dark-green-color);
-  color: #fff;
+  color: var(--white-color);
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s ease;
@@ -108,16 +86,17 @@ button.secondary:hover {
 
 .hint {
   font-size: 13px;
-  color: #7a869a;
+  color: var(--mid2-gray-color);
   margin-top: 10px;
 }
 
 .success {
-  background: #ecfdf5;
-  color: #065f46;
+  background: var(--light-green-color);
+  color: var(--white-color);
   padding: 10px;
   border-radius: 8px;
   margin-top: 14px;
+  margin-bottom: 20px;
 }
 
 .error {

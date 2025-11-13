@@ -6,21 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Solid Edge Educatieve Webtool</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/feedback.css" />
+  <link rel="stylesheet" href="css/home.css"> <!-- indien aparte stylesheet -->
+  <link rel="stylesheet" href="css/uitleg.css"> <!-- indien aparte stylesheet -->
 </head>
 
 <body>
   <!-- ✅ Bovenste groene balk -->
+<div id="stickyTop">
   <div id="siteHeader">
     <div id="siteTitle">
       <h1><span data-text="siteName"></span></h1>
     </div>
     <div class="search-section">
-      <input type="text" id="search" placeholder="Zoek een functie...">
-      <button onclick="searchSite(true)">Zoeken</button>
-    </div>
+  <div class="search-wrapper">
+    <input type="text" id="search" placeholder="Zoek een functie...">
+    <ul id="search-suggestions"></ul> <!-- 🔹 Voeg deze regel toe -->
+  </div>
+  <button onclick="searchSite(true)">Zoeken</button>
+</div>
   </div>
 
-  <!-- ✅ Navigatiebalk direct onder header -->
+  <!-- ✅ Navigatie direct onder header -->
   <div id="navHeader">
     <nav>
       <ul class="nav-tabs">
@@ -30,6 +37,7 @@
       </ul>
     </nav>
   </div>
+</div>
 
   <!-- ✅ Hoofdinhoud -->
   <div id="content"></div>

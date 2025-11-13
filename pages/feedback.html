@@ -1,10 +1,16 @@
 <!-- Feedbackformulier -->
 <div id="formContent">
-  <p class="lead">
-    <div id="koptekst">
-    Geef hier door wat je graag anders zou willen zien. Zit ergens een foutje of mis je een functie. Laat het hier weten. </p>
-</div>
+  <div id="koptekst">
+    <p class="lead">
+      Geef hier door wat je graag anders zou willen zien. Zit ergens een foutje of mis je een functie? Laat het hier
+      weten.
+    </p>
+  </div>
+
+
   <form id="feedbackForm">
+    <div id="result" role="status" aria-live="polite"></div>
+
     <label for="name">Naam</label>
     <input id="name" name="name" type="text" placeholder="Jouw naam" required />
 
@@ -14,13 +20,8 @@
     <label for="message" class="message-label">
       Wat zou je graag anders willen zien / vertel probleem
     </label>
-    <textarea
-      id="message"
-      name="message"
-      maxlength="2000"
-      placeholder="Beschrijf hier kort wat je anders zou willen zien of welk probleem je tegenkomt"
-      required
-    ></textarea>
+    <textarea id="message" name="message" maxlength="2000"
+      placeholder="Beschrijf hier kort wat je anders zou willen zien of welk probleem je tegenkomt" required></textarea>
 
     <div class="charcount" id="charcount">0 / 2000</div>
 
@@ -31,12 +32,9 @@
 
     <div class="hint">
       Tip: als je geen server-side oplossing hebt, kun je op "Open in e-mailprogramma" klikken — dat opent een nieuw
-      e-mailconcept met jouw bericht </div>
-
-    <div id="result" role="status" aria-live="polite"></div>
+      e-mailconcept met jouw bericht
+    </div>
   </form>
 
   <hr class="divider" />
 </div>
-
-<link rel="stylesheet" href="css/feedback.css" />

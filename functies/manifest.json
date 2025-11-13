@@ -1,27 +1,32 @@
 [
-    {
-        "name": "functie_ 1_software_openen",
-        "title": "Open de solid edge software",
-        "level": "beginner"
-    },
-    {
-        "name": "functie_2_bestand_aanmaken",
-        "title": "Maak een bestand",
-        "level": "beginner"
-    },
-    {
-        "name": "functie_3_muisbediening",
-        "title": "Muisbediening",
-        "level": "beginner"
-    },
-    {
-        "name": "functie_4_design",
-        "title": "",
-        "level": "beginner"
-    },
-    {
-        "name": "functie_5_test1234",
-        "title": "chicken",
-        "level": "beginner"
-    }
+  {
+    "name": "functie_1_software_openen",
+    "title": "Software openen",
+    "level": "Beginner"
+  },
+  {
+    "name": "functie_2_bestand_aanmaken",
+    "title": "Bestand aanmaken",
+    "level": "Beginner"
+  },
+  {
+    "name": "functie_3_muisbediening",
+    "title": "Muisbediening",
+    "level": "Beginner"
+  },
+  {
+    "name": "functie_4_design",
+    "title": "Design en layout",
+    "level": "Gevorderd"
+  },
+  {
+    "name": "functie_13_export_step",
+    "title": "Exporteren (STEP)",
+    "level": "Expert"
+  },
+  {
+    "name": "functie_x_template",
+    "title": "Template Functie",
+    "level": "Test"
+  }
 ]
